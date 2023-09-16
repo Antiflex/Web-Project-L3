@@ -1,2 +1,2 @@
-import 'express'
-console.log("Hello World")
+const express = require('express');
+console.log("Hello World");
