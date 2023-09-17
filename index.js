@@ -9,7 +9,7 @@ let ticTacToeMat = [
     [0,0,0]];
 
 function fillMatrix(coords, choice){
-    if (ticTacToeMat[coords[0]][coords[1]] === 0) {
+    if (ticTacToeMat[coords[0]][coords[1]] !== 0) {
         ticTacToeMat[coords[0]][coords[1]] = choice;
     }
     else
