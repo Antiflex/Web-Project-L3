@@ -1,7 +1,7 @@
 # Web Project : EZ Games
-***main features :***  
-a few simple games like tic-tac-toe or whack-a-hole  
-a login system to have the scores saved
+**main features :**  
+a few simple games like [*tic-tac-toe*](https://en.wikipedia.org/wiki/Tic-tac-toe) or [*whac-a-mole*](https://en.wikipedia.org/wiki/Whac-A-Mole)  
+the scores are saved for each player
 
-***other features :***
+**other features :**
 a leaderboard for each game
