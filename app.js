@@ -6,8 +6,11 @@ const app = express();
 app.get("/", (req, res) => {
     console.log("Here");
     res.status(500);
-    res.send("<h1>Hi</h1>");
-    res.render("./static/index.html")
+    res.send("hi");
+});
+
+app.get(["/index", "/static/index/index.html"],(req, res) => {
+    res.status(500).sendFile("static/index/index.html",{ root: "./" });
 });
 
 app.all("*",(req, res) => {

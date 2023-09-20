@@ -1,4 +1,4 @@
-const app = require('app');
+const app = require('./app');
 console.log("Hello World");
 
 // matrix for the tic-tac-toe game
