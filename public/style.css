@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-/* Style the header */
+/* Style of the header */
 header {
     background-color: #333;
     color: #fff;
@@ -19,7 +19,7 @@ header {
     padding: 20px 0;
 }
 
-/* Style the navigation menu */
+/* Style of the navigation menu */
 nav ul {
     list-style-type: none;
     text-align: center;
@@ -38,7 +38,7 @@ nav a {
     font-weight: bold;
 }
 
-/* Style the main content */
+/* Style of the main content */
 main {
     max-width: 800px;
     margin: 20px auto;
@@ -49,7 +49,7 @@ main {
     text-align: center;
 }
 
-/* Style the game previews */
+/* Style of the game previews */
 .game-preview {
     margin-bottom: 30px;
 }
@@ -65,16 +65,33 @@ main {
 }
 
 
-/* Style the thumbnail images */
+/* Style of the thumbnail images */
 .game-preview img {
     width: 200px;
     height: 200px;
 }
 
-/* Style the footer */
+/* Style of the footer */
 footer {
     text-align: center;
     padding: 10px 0;
     background-color: #333;
     color: #fff;
+}
+
+/* style of the forms */
+
+input{
+    margin: 5px;
+}
+/* Style of the buttons */
+.button1{
+    display: inline-flex;
+    margin: 5px;
+    width: 120px;
+    height: 40px;
+    border-width: 0px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #519afa;
 }

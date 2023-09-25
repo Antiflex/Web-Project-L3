@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whack-a-Mole</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header>
-  <h1>Whack-a-Mole Game</h1>
-</header>
+<%- include ('header.ejs')%>
 <main>
+<p> Hi <%=query.pseudo%> !<br>
+  You are going to play <%=query.game%> in difficulty <%=query.difficultyString%> !</p>
+<div class="game-preview"><img src="/images/whack-a-mole-thumbnail" alt="Whack-a-Mole Thumbnail" class="gamepreview"></div>
   <div class="game-container">
     <!-- Grid for moles -->
     <div class="hole hole1"></div>
@@ -28,6 +29,9 @@
     <p>Time Left: <span id="time-left">30</span> seconds</p>
   </div>
 </main>
+<!--
 <script src="whack_a_mole.js"></script>
+-->
+<%- include ('footer.ejs')%>
 </body>
 </html>
