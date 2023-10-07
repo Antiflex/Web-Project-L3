@@ -73,9 +73,6 @@ main {
 
 /* Style of the footer */
 footer {
-    position: absolute;
-    bottom: 0;
-    width:100%;
     text-align: center;
     padding: 10px 0;
     background-color: #333;
@@ -88,14 +85,13 @@ input{
     margin: 5px;
 }
 /* Style of the buttons */
-button{
-    display: inline-block;
+.button1{
+    display: inline-flex;
     margin: 5px;
     width: 120px;
     height: 40px;
     border-width: 0px;
     border-radius: 5px;
     text-align: center;
-    vertical-align: middle;
     background-color: #519afa;
 }

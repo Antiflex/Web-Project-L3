@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZ games</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<%- include ('header.ejs')%>
+<main>
+    <form action="/trylogin" method="post">
+        <div><label for="pseudo">Pseudo : </label>
+            <input type="text" name="pseudo" required>
+        </div>
+        <div>
+            <label for="password">Password : </label>
+            <input type="password" name="password" required>
+        </div>
+        <button type="submit"><strong>Login</strong></button>
+    </form>
+    <p>don't have an account yet ? <a href = "/signup">create one</a></p>
+</main>
+<%- include ('footer.ejs')%>
+</body>
+</html>

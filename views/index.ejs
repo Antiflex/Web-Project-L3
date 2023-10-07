@@ -4,18 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZ games</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<header>
-    <h1>Welcome to EZ games</h1>
-</header>
-<nav>
-    <ul>
-        <li><a href="../views/whack_a_mole.ejs">Play Whack-a-Mole</a></li>
-        <li><a href="../views/tic_tac_toe.ejs">Play Tic-Tac-Toe</a></li>
-    </ul>
-</nav>
+<%- include ('header.ejs')%>
 <main>
     <h3>How would you like to play ?</h3>
     <form action="/" method="post">
@@ -35,8 +27,6 @@
         </fieldset>
     </form>
 </main>
-<footer>
-    <p>&copy; 2023 EZ Games</p>
-</footer>
+<%- include ('footer.ejs')%>
 </body>
 </html>

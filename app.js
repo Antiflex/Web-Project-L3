@@ -1,54 +1,51 @@
-const express = require('express');
-const fs = require('fs');
-const promisify = require('util')
-const {response} = require("express");
-const {sendGame} = require("./controllers/gamesController");
+import express from 'express';
+import * as fs from 'fs';
+import promissify from 'util'
+
+import {getGameParams, sendGame} from './controllers/gamesController.js';
+import {UserProfileController} from './controllers/userProfile.js'
 
 const app = express();
-app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.set('views',  "./views");
+app.use(express.static('./public'));
 
 // public endpoints
 
 // root -> index
 app.get("/",(req, res) => {
-    res.status(200).sendFile("public/index.html",{ root: "./" });
+    res.status(200).render('index.ejs',{ root: "./" });
 });
 
 // whack-a-mole page
 app.get("/whack-a-mole",(req, res) => {
-    res.status(200).sendFile("whack_a_mole.ejs");
+    res.render("whack_a_mole", {query : {pseudo : "anonymous user", game : "whack-a-mole", difficultyString : "Medium"}});
 });
 
+// tic-tac-toe page
 app.get("/tic-tac-toe",(req, res) => {
-    res.status(200).render("tic_tac_toe.ejs");
+    res.render("tic_tac_toe", {query : {pseudo : "anonymous user", game : "tic-tac-toe", difficultyString : "Medium"}});
 });
 
-app.get("style.css",(req,res)=> {
-    res.sendFile("public/style.css",{ root: "./" });
-})
+//login page
 
-app.get("/images/whack-a-mole-thumbnail",(req, res) => {
-    res.sendFile("public/images/whack_a_mole_thumbnail.png",{ root: "./" });
+app.get("/login",(req,res)=>{
+    res.render("login");
 });
 
-app.get("/images/tic-tac-toe-thumbnail",(req, res) => {
-    res.sendFile("public/images/tic_tac_toe_thumbnail.png",{ root: "./" });
-});
 // dynamic endpoints
 
-app.post("/api/play", (req,res)=> {
-    req.body.game = req.query.game;
-    const difficultyTab = ['Easy','Medium','Hard']
-    req.body.difficultyString = difficultyTab[req.body.difficulty];
-    console.log(req.body);
-    if(req.query.game == "whack-a-mole")
-        res.render("whack_a_mole.ejs",{query : req.body});
-    else
-        res.render("tic_tac_toe.ejs",{query : req.body});
-});
+app.post('/api/get_game_params', getGameParams);
+
+app.post("/api/play", sendGame);
+
+//app.post("/trylogin",tryLogin);
+
+app.post('/create_user_profile', UserProfileController.createUserProfile);
+
+app.get('/get_user_profile', UserProfileController.getUserProfileById);
 
 // error 404
 
