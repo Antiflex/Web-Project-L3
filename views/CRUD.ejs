@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZ games</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<%- include ('header.ejs')%>
+<main>
+    <form class ="knex_form" id="get_user_form" method="post" action="/get_user_profile">
+        <fieldset>
+            <legend>Get User Profile</legend>
+            <label>Pseudo : </label>
+            <input required name="pseudo" type="text">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+    <form class ="knex_form" id="create_user_form" method="post" action="/create_user_profile">
+        <fieldset>
+        <legend>Create User</legend>
+        <label>Pseudo : </label>
+        <input required name="pseudo" type="text">
+        <label>Password : </label>
+        <input required name="password" type="password">
+        <label>Age : </label>
+        <input required name="age" type="number">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+    <form class ="knex_form" id="update_user_form" method="post" action="/update_user_profile">
+        <fieldset>
+            <legend>Update User</legend>
+            <label>Pseudo : </label>
+            <input required name="pseudo" type="text">
+            <label>Age : </label>
+            <input required name="age" type="number">
+            <label>About me : </label>
+            <input name="aboutMe" type="text" maxlength="255">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+</main>
+<main>
+    <form class ="knex_form" id="get_friendlist_form" method="post" action="/get_user_friendlist">
+        <fieldset>
+            <legend>Get Friendlist</legend>
+            <label>Pseudo : </label>
+            <input required name="pseudo" type="text">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+    <form class ="knex_form" id="create_friendship" method="post" action="/create_friend_row">
+        <fieldset>
+            <legend>Create Friendship</legend>
+            <label>Pseudo of player 1: </label>
+            <input required name="pseudo1" type="text">
+            <label>Pseudo of player 2: </label>
+            <input required name="pseudo2" type="text">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+    <form class ="knex_form" id="delete_friendship" method="post" action="/delete_friend_row">
+        <fieldset>
+            <legend>Delete Friendship</legend>
+            <label>Pseudo of player 1: </label>
+            <input required name="pseudo1" type="text">
+            <label>Pseudo of player 2: </label>
+            <input required name="pseudo2" type="text">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
+</main>
+<%- include ('footer.ejs')%>
+</body>
+</html>

@@ -8,6 +8,7 @@
   "scripts": {
     "migrate" : "npx knex migrate:latest --knexfile database/knexfile.cjs",
     "start": "node app.js",
+    "dev": "nodemon app.js",
     "app": "app.js"
   },
   "type": "module",

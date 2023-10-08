@@ -7,6 +7,10 @@ export class UserProfileServiceClass{
     createUserProfile(pseudo, age, aboutMe, password){
         return UserProfileDAO.createUserProfile(pseudo, age, aboutMe, password);
     }
+
+    updateUserProfile(pseudo, age, aboutMe){
+        return UserProfileDAO.updateUserProfile(pseudo, age, aboutMe);
+    }
 }
 
 export const UserProfileService = new UserProfileServiceClass();

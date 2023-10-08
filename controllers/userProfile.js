@@ -22,6 +22,17 @@ class UserProfileControllerClass {
             console.log(err);
         }
     };
+
+    async updateUserProfile(req,res){
+        console.log(`trying to update user ${req.body.pseudo}`);
+        try{
+            const id = await UserProfileService.updateUserProfile(req.body.pseudo, req.body.age, req.body.aboutMe);
+            res.status(201).json(id);
+        }
+        catch (err){
+            console.log(err);
+        }
+    };
 }
 
 export const UserProfileController =  new UserProfileControllerClass();
