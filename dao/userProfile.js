@@ -10,36 +10,44 @@ class UserProfileDAOClass{
     async getUserProfileById(pseudo) {
         if(await this.existsUser(pseudo)) {
             const [result] = await db('user_profile').select("*").where({id_name: pseudo});
-            return result;
+            return {success:true, row:result};
         }
-        else return {error:"User doesn't exist"};
+        else return {succes:false, error:"User doesn't exist"};
     }
-
 
 
     async createUserProfile(pseudo, age, aboutMe, password) {
         //check if the user already exists
         if (await this.existsUser(pseudo) === 0) {
-            const [id] = await db('user_profile').insert({
+            const [row] = await db('user_profile').insert({
                 id_name: pseudo,
                 age: age,
                 about_me: aboutMe,
                 password: password
             }).returning('*');
 
-            return id;
-        }else return {error :"User with this pseudo already exist"};
+            return {succes:true, row:row};
+        }else return {succes:false, error :"User with this pseudo already exist"};
     }
 
     async updateUserProfile(pseudo, age, aboutMe) {
         //check if the user exists
         if (await this.existsUser(pseudo) !== 0) {
-            const [id] = await db('user_profile').where({id_name: pseudo}).update({
+            const row = await db('user_profile').where({id_name: pseudo}).update({
                 age: age,
-                about_me: aboutMe,
-            }).returning('*');
-            return id;
-        }else return {error :"User with this pseudo does not exist"};
+                about_me: aboutMe });
+            return {succes:true};
+        }else return {success:false, error :"User with this pseudo does not exist"};
+    }
+
+    async deleteUserProfile(pseudo, age, aboutMe) {
+        //check if the user exists
+        if (await this.existsUser(pseudo) !== 0) {
+            const row = await db('user_profile').where({id_name: pseudo}).del({
+                age: age,
+                about_me: aboutMe});
+            return {succes:true};
+        }else return {success:false, error :"User with this pseudo does not exist"};
     }
 }
 
