@@ -1,5 +1,5 @@
-
 import {FriendDAO} from '../dao/friend.js'
+
 export class FriendServiceClass{
     getFriendListById(pseudo){
         return FriendDAO.getFriendListById(pseudo);

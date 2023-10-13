@@ -12,7 +12,7 @@ class UserProfileDAOClass{
             const [result] = await db('user_profile').select("*").where({id_name: pseudo});
             return {success:true, row:result};
         }
-        else return {succes:false, error:"User doesn't exist"};
+        else return {success:false, error:"User doesn't exist"};
     }
 
 
@@ -26,8 +26,8 @@ class UserProfileDAOClass{
                 password: password
             }).returning('*');
 
-            return {succes:true, row:row};
-        }else return {succes:false, error :"User with this pseudo already exist"};
+            return {success:true, row:row};
+        }else return {success:false, error :"User with this pseudo already exist"};
     }
 
     async updateUserProfile(pseudo, age, aboutMe) {
@@ -36,17 +36,15 @@ class UserProfileDAOClass{
             const row = await db('user_profile').where({id_name: pseudo}).update({
                 age: age,
                 about_me: aboutMe });
-            return {succes:true};
+            return {success:true};
         }else return {success:false, error :"User with this pseudo does not exist"};
     }
 
-    async deleteUserProfile(pseudo, age, aboutMe) {
+    async deleteUserProfile(pseudo) {
         //check if the user exists
         if (await this.existsUser(pseudo) !== 0) {
-            const row = await db('user_profile').where({id_name: pseudo}).del({
-                age: age,
-                about_me: aboutMe});
-            return {succes:true};
+            const row = await db('user_profile').where({id_name: pseudo}).del('*');
+            return {success:true};
         }else return {success:false, error :"User with this pseudo does not exist"};
     }
 }

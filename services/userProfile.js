@@ -11,6 +11,10 @@ export class UserProfileServiceClass{
     updateUserProfile(pseudo, age, aboutMe){
         return UserProfileDAO.updateUserProfile(pseudo, age, aboutMe);
     }
+
+    deleteUserProfile(pseudo){
+        return UserProfileDAO.deleteUserProfile(pseudo);
+    }
 }
 
 export const UserProfileService = new UserProfileServiceClass();

@@ -33,6 +33,17 @@ class UserProfileControllerClass {
             console.log(err);
         }
     };
+
+    async deleteUserProfile(req,res){
+        console.log(`trying to delete user ${req.body.pseudo}`);
+        try{
+            const result = await UserProfileService.deleteUserProfile(req.body.pseudo);
+            res.status(201).json(result);
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
 }
 
 export const UserProfileController =  new UserProfileControllerClass();

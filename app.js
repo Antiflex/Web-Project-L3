@@ -1,11 +1,12 @@
 import express from 'express';
 import * as fs from 'fs';
-import promissify from 'util'
-
+import promisify from 'util'
 
 import {getGameParams, sendGame} from './controllers/gamesController.js';
 import {UserProfileController} from './controllers/userProfile.js';
 import {FriendController} from "./controllers/friend.js";
+import {tttLeaderBoardController} from "./controllers/tttLeaderboard.js";
+import {wamLeaderBoardController} from "./controllers/wamLeaderboard.js";
 
 const app = express();
 app.use(express.json());
@@ -58,6 +59,8 @@ app.post('/create_user_profile', UserProfileController.createUserProfile);
 
 app.post("/update_user_profile",UserProfileController.updateUserProfile);
 
+app.post('/delete_user_profile', UserProfileController.deleteUserProfile);
+
 // friend table api routes
 
 app.post('/get_user_friendlist', FriendController.getFriendListById);
@@ -65,6 +68,42 @@ app.post('/get_user_friendlist', FriendController.getFriendListById);
 app.post('/create_friend_row', FriendController.createFriendRow);
 
 app.post('/delete_friend_row', FriendController.deleteFriendRow);
+
+// ttt_leaderboard api routes
+
+app.get('/ttt_leaderboard/get_leaderboard', tttLeaderBoardController.getLeaderboard)
+
+app.post('/ttt_leaderboard/get_place_by_id', tttLeaderBoardController.getPlaceById);
+
+app.post('/ttt_leaderboard/get_place_by_pseudo', tttLeaderBoardController.getPlaceByPseudo);
+
+app.post('/ttt_leaderboard/get_last_place',tttLeaderBoardController.getLastPlace);
+
+app.post('/ttt_leaderboard/create_place', tttLeaderBoardController.createPlace);
+
+app.get('/ttt_leaderboard/update_leaderboard', tttLeaderBoardController.updateLeaderboard)
+
+app.post('/ttt_leaderboard/update_place_by_pseudo', tttLeaderBoardController.updatePlaceByPseudo);
+
+app.post('/ttt_leaderboard/delete_place_by_pseudo', tttLeaderBoardController.deletePlaceByPseudo);
+
+// wam_leaderboard api routes
+
+app.get('/wam_leaderboard/get_leaderboard', wamLeaderBoardController.getLeaderboard)
+
+app.post('/wam_leaderboard/get_place_by_id', wamLeaderBoardController.getPlaceById);
+
+app.post('/wam_leaderboard/get_place_by_pseudo', wamLeaderBoardController.getPlaceByPseudo);
+
+app.post('/wam_leaderboard/get_last_place',wamLeaderBoardController.getLastPlace);
+
+app.post('/wam_leaderboard/create_place', wamLeaderBoardController.createPlace);
+
+app.get('/wam_leaderboard/update_leaderboard', wamLeaderBoardController.updateLeaderboard)
+
+app.post('/wam_leaderboard/update_place_by_pseudo', wamLeaderBoardController.updatePlaceByPseudo);
+
+app.post('/wam_leaderboard/delete_place_by_pseudo', wamLeaderBoardController.deletePlaceByPseudo);
 
 // error 404
 

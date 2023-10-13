@@ -41,11 +41,19 @@
             <button type="submit"><strong>Submit</strong></button>
         </fieldset>
     </form>
+    <form class ="knex_form" id="delete_user_form" method="post" action="/delete_user_profile">
+        <fieldset>
+            <legend>Delete User</legend>
+            <label>Pseudo : </label>
+            <input required name="pseudo" type="text">
+            <button type="submit"><strong>Submit</strong></button>
+        </fieldset>
+    </form>
 </main>
 <main>
     <form class ="knex_form" id="get_friendlist_form" method="post" action="/get_user_friendlist">
         <fieldset>
-            <legend>Get Friendlist</legend>
+            <legend>Get Friend list</legend>
             <label>Pseudo : </label>
             <input required name="pseudo" type="text">
             <button type="submit"><strong>Submit</strong></button>

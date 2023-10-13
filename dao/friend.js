@@ -12,7 +12,7 @@ class FriendDAOClass{
                 for (let i = 0; i<result.length; i++) {
                     friends[i] = result[i].friend;
                 }
-                    return {succes:true, friends:friends};
+                    return {success:true, friends:friends};
         }else return {success:false, error:"User doesn't exist"}
     }
 
@@ -29,8 +29,8 @@ class FriendDAOClass{
             const[result] = await db('is_friend_with')
                 .where({id_player_1: pseudo1, id_player_2: pseudo2})
                 .orWhere({id_player_1:pseudo2, id_player_2:pseudo1}).count();
-            return {value: parseInt(result.count), succes:true, error:null};
-        } else return {value: null, succes:false, error: "One user or more do not exist "};
+            return {value: parseInt(result.count), success:true, error:null};
+        } else return {value: null, success:false, error: "One user or more do not exist "};
     };
 
     async createFriendRow(pseudo1, pseudo2) {
