@@ -1,14 +1,26 @@
 import express from 'express';
+import session from 'express-session'
 import * as fs from 'fs';
-import promisify from 'util'
+import promisify from 'util';
 
-import {getGameParams, sendGame} from './controllers/gamesController.js';
 import {UserProfileController} from './controllers/userProfile.js';
 import {FriendController} from "./controllers/friend.js";
 import {tttLeaderBoardController} from "./controllers/tttLeaderboard.js";
 import {wamLeaderBoardController} from "./controllers/wamLeaderboard.js";
+import {gameSessionController} from "./controllers/gameSession.js";
+
+import {getGameParams, playTTT, playWAM, sendGame} from './controllers/gamesController.js';
+import {login, userProfile} from './controllers/login.js'
 
 const app = express();
+app.use(
+    session({
+        secret: "some secret",
+        cookie: { maxAge: 3000000 },
+        saveUninitialized: false,
+        resave:false
+    })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -23,27 +35,40 @@ app.get("/",(req, res) => {
 });
 
 // whack-a-mole page
-app.get("/whack-a-mole",(req, res) => {
-    res.render("whack_a_mole", {query : {pseudo : "anonymous user", game : "whack-a-mole", difficultyString : "Medium"}});
-});
+app.get("/whack-a-mole",playWAM);
 
 // tic-tac-toe page
-app.get("/tic-tac-toe",(req, res) => {
-    res.render("tic_tac_toe", {query : {pseudo : "anonymous user", game : "tic-tac-toe", difficultyString : "Medium"}});
-});
+app.get("/tic-tac-toe",playTTT);
 
-//login page
+//user related pages
 
+// login page
 app.get("/login",(req,res)=>{
-    res.render("login");
+    res.render("user/login",{error:req.query.error, pseudo:req.query.pseudo, info:req.query.info});
 });
 
+// logout
+
+app.get("/logout",(req,res)=>{
+    if(req.session.authenticated == undefined) {
+        res.redirect('/login?info=You are not logged in')
+    }else {
+        req.session.destroy();
+        res.redirect('/login?info=Succesfully logged out')
+    }
+})
+
+// user profile page
+
+app.get("/user_profile",userProfile);
 
 // CRUD requests test page
 
 app.get("/CRUD",(req,res)=>{
     res.render("CRUD");
 })
+
+app.post('/trylogin',login);
 
 // dynamic endpoints
 
@@ -104,6 +129,14 @@ app.get('/wam_leaderboard/update_leaderboard', wamLeaderBoardController.updateLe
 app.post('/wam_leaderboard/update_place_by_pseudo', wamLeaderBoardController.updatePlaceByPseudo);
 
 app.post('/wam_leaderboard/delete_place_by_pseudo', wamLeaderBoardController.deletePlaceByPseudo);
+
+// game_session api routes
+
+app.post('/game_session/get_game_session_by_pseudo', gameSessionController.getGameSessionsByPseudo);
+
+app.post('/game_session/get_game_session_by_two_pseudos', gameSessionController.getGameSessionsByTwoPseudos);
+
+app.post('/game_session/create_game_session',gameSessionController.createGameSession);
 
 // error 404
 

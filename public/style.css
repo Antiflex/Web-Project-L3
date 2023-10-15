@@ -19,6 +19,11 @@ header {
     padding: 20px 0;
 }
 
+.title {
+    text-decoration: none;
+    color: #519afa;
+}
+
 /* Style of the navigation menu */
 nav ul {
     list-style-type: none;
@@ -39,7 +44,7 @@ nav a {
 }
 
 /* Style of the main content */
-main {
+main, section{
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
@@ -89,13 +94,55 @@ input{
 }
 /* Style of the buttons */
 button{
+    font-weight: bold;
     display: inline-block;
     margin: 5px;
     width: 120px;
     height: 40px;
-    border-width: 0px;
+    border: solid #3784e5 2px;
+    box-shadow: #dddfe1 2px 2px 3px;
     border-radius: 5px;
     text-align: center;
     vertical-align: middle;
     background-color: #519afa;
+}
+
+/* login page specific */
+
+.message_box{
+    width: 60%;
+    margin: 5px 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.error{
+    border-color: crimson;
+    background-color: #ffdae4;
+    color: #e07e92;
+}
+
+.info{
+    border-color: #54a0ff;
+    background-color: #d5ecff;
+    color: #5ca9de;
+}
+
+fieldset{
+    border: solid #54585d 1px;
+    border-radius: 5px;
+    box-shadow: #dddfe1 2px 2px 5px;
+    margin: 8px
+}
+
+.icon{
+    display:inline-block;
+    width:1em;
+    height: auto;
+    filter: invert();
+}
+
+.cell {
 }

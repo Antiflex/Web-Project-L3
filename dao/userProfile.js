@@ -1,4 +1,7 @@
 import db from "../database/database.js";
+import * as bcrypt from 'bcrypt'
+
+const numSaltRounds = 8;
 
 class UserProfileDAOClass{
 
@@ -17,13 +20,14 @@ class UserProfileDAOClass{
 
 
     async createUserProfile(pseudo, age, aboutMe, password) {
+        const hash = await bcrypt.hash(password, numSaltRounds);
         //check if the user already exists
         if (await this.existsUser(pseudo) === 0) {
             const [row] = await db('user_profile').insert({
                 id_name: pseudo,
                 age: age,
                 about_me: aboutMe,
-                password: password
+                password: hash
             }).returning('*');
 
             return {success:true, row:row};

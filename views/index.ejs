@@ -12,18 +12,14 @@
     <h3>How would you like to play ?</h3>
     <form action="/" method="post">
         <fieldset>
-            <div id="pseudo">
-                <label>Pseudo :</label>
-                <input id="text-box-pseudo" name="pseudo" type="text" required>
-            </div>
             <div id="difficulty">
                 <label>Difficulty :</label>
                 <input id="slider" name="difficulty" type="range" min="0" max="2" value="0" step="1" oninput="const difficulty = ['Easy','Medium','Hard'];
                 rangeValue.innerText = difficulty[this.value]">
                 <p id="rangeValue">Easy</p>
             </div>
-            <button class="button1" type="submit" formaction="/api/play?game=whack-a-mole"><strong>Play whack-a-mole!</strong></button>
-            <button class="button1" type="submit" formaction="/api/play?game=tic-tac-toe"><strong>Play tic-tac-toe!</strong></button>
+            <button class="button1" type="submit" formaction="/api/play?game=whack-a-mole">Play whack-a-mole!</button>
+            <button class="button1" type="submit" formaction="/api/play?game=tic-tac-toe">Play tic-tac-toe!</button>
         </fieldset>
     </form>
     <div>

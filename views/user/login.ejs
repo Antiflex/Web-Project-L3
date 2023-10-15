@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZ games</title>
     <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-<%- include ('header.ejs')%>
+<%- include ('../header.ejs')%>
 <main>
+    <%if(error!=null && error!= undefined){%>
+        <div class="message_box error">
+            <%if(error == 'pass') {%>
+                <p>Incorrect password</p>
+            <%}%>
+            <%if(error == 'user'){%>
+                <p>User <%=pseudo%> does not exist</p>
+            <%}%>
+        </div>
+    <%}%>
+    <%if(info!=null && info!= undefined){%>
+    <div class="message_box info">
+        <p><%=info%></p>
+    </div>
+    <%}%>
+
     <form action="/trylogin" method="post">
         <div><label for="pseudo">Pseudo : </label>
             <input type="text" name="pseudo" required>
@@ -17,10 +34,10 @@
             <label for="password">Password : </label>
             <input type="password" name="password" required>
         </div>
-        <button type="submit"><strong>Login</strong></button>
+        <button type="submit">Login</button>
     </form>
     <p>don't have an account yet ? <a href = "/signup">create one</a></p>
 </main>
-<%- include ('footer.ejs')%>
+<%- include ('../footer.ejs')%>
 </body>
 </html>
