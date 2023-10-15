@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/style.css">
     <style>
         table {
+            margin: 10px;
             width: 100%;
             border-collapse: collapse;
             font-family: Tahoma, Geneva, sans-serif;
@@ -28,34 +29,102 @@
         table tbody tr {
             background-color: #f9fafb;
         }
+        div{
+            margin: 10px;
+        }
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <data id="data" hidden><%=data%></data>
 </head>
 <body>
 <%- include ('../header.ejs')%>
-<main>
+<main id="app">
     <h1>User Profile</h1>
-    <table>
-        <tbody>
-        <tr>
-            <th>Pseudo</th>
-            <th>Age</th>
-            <th>About me</th>
-        </tr>
-        <tr>
-            <td><%=userResult.id_name%></td>
-            <td><%=userResult.age%></td>
-            <td><%=userResult.about_me%></td>
-        </tr>
-        </tbody>
-    </table>
-    <form action="/logout">
-        <button type="submit"><strong>Logout</strong></button>
-    </form>
+    <div id="user_infos">
+        <h2>Infos</h2>
+        <table>
+            <tbody>
+            <tr>
+                <th>Pseudo</th>
+                <th>Age</th>
+                <th>About me</th>
+            </tr>
+                <td>{{ data.userResult.id_name }}</td>
+                <td>{{ data.userResult.age }}</td>
+                <td>{{ data.userResult.about_me }}</td>
+            </tbody>
+        </table>
+
+        <form action="/logout">
+            <button type="submit"><strong>Logout</strong></button>
+        </form>
+    </div>
+
+    <div id="ttt_rank">
+        <h2>Tic-Tac-Toe ranking</h2>
+        <table>
+            <tbody>
+            <tr>
+                <th>Place</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losses</th>
+                <th>Total score</th>
+            </tr>
+            <tr>
+                <td>#{{data.tttResult.id_place_ttt}}</td>
+                <td>{{data.tttResult.wins}}</td>
+                <td>{{data.tttResult.draws}}</td>
+                <td>{{data.tttResult.losses}}</td>
+                <td>{{20*data.tttResult.wins - 15 * data.tttResult.losses}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="wam_rank">
+        <h2>Whack-A-Mole ranking</h2>
+        <table>
+            <tbody>
+            <tr>
+                <th>place</th>
+                <th>wins</th>
+                <th>losses</th>
+                <th>Total score</th>
+            </tr>
+            <tr>
+                <td>#{{data.wamResult.id_place_wam}}</td>
+                <td>{{data.wamResult.wins}}</td>
+                <td>{{data.wamResult.losses}}</td>
+                <td>{{20*data.wamResult.wins - 15 * data.wamResult.losses}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="game_sessions">
+        <h2>Past games</h2>
+        <table>
+            <tbody>
+            <tr>
+                <th>Game</th>
+                <th>Result</th>
+                <th>Date</th>
+                <th>Against</th>
+            </tr>
+            <tr v-for="row in data.sessionResult">
+                <td>{{ row.game_type }}</td>
+                <td>{{ row.game_result }}</td>
+                <td>{{ row.game_date }}</td>
+                <td>{{ row.id_player_2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 
 <script src="/scripts/user_profile.js"></script>
-<script> const mountedApp = app.mount()</script>
+<script> const mountedApp = app.mount('#app')</script>
 <%- include ('../footer.ejs')%>
 </body>
 </html>
