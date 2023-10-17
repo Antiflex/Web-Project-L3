@@ -9,8 +9,8 @@
 </head>
 <body>
 <%- include ('../header.ejs')%>
-<main>
-    <%if(error!=null && error!= undefined){%>
+<main class="form_main">
+    <%if(['pass','user'].includes(error)){%>
         <div class="message_box error">
             <%if(error == 'pass') {%>
                 <p>Incorrect password</p>
@@ -20,23 +20,23 @@
             <%}%>
         </div>
     <%}%>
-    <%if(info!=null && info!= undefined){%>
+    <%if(info!=null && info!= undefined && info !==''){%>
     <div class="message_box info">
         <p><%=info%></p>
     </div>
     <%}%>
 
     <form action="/trylogin" method="post">
-        <div><label for="pseudo">Pseudo : </label>
+        <div><label class="log_label" for="pseudo">Pseudo : </label>
             <input type="text" name="pseudo" required>
         </div>
         <div>
-            <label for="password">Password : </label>
+            <label class="log_label" for="password">Password : </label>
             <input type="password" name="password" required>
         </div>
         <button type="submit">Login</button>
     </form>
-    <p>don't have an account yet ? <a href = "/signup">create one</a></p>
+    <p>Don't have an account yet ? <a href = "/signup">create one</a></p>
 </main>
 <%- include ('../footer.ejs')%>
 </body>

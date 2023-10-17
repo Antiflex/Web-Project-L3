@@ -91,6 +91,17 @@ class tttLeaderboardControllerClass{
         }
     }
 
+    async updatePlaceByPseudoIncrement(req,res) {
+        console.log('--------------------\n body :',req.body);
+        try{
+            const result = await tttLeaderBoardService.updatePlaceByPseudoIncrement(req.body.pseudo, req.body.gameResult);
+            res.status(201).json(result);
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
+
     async deletePlaceByPseudo(req,res) {
         try{
             const result = await tttLeaderBoardService.deletePlaceByPseudo(req.body.pseudo);

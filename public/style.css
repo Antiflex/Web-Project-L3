@@ -45,7 +45,7 @@ nav a {
 
 /* Style of the main content */
 main, section{
-    max-width: 800px;
+    max-width: 70%;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -69,11 +69,15 @@ main, section{
     margin-bottom: 20px;
 }
 
+.game-preview-img{
+    display: inline-flex;
+}
 
 /* Style of the thumbnail img */
-.game-preview img {
-    width: 200px;
-    height: 200px;
+.game-preview-img img {
+    display: inline-flex;
+    width: 150px;
+    height: 150px;
 }
 
 /* Style of the footer */
@@ -85,6 +89,8 @@ footer {
     padding: 10px 0;
     background-color: #333;
     color: #fff;
+    max-height: 10px;
+    z-index: 100;
 }
 
 /* style of the forms */
@@ -107,7 +113,27 @@ button{
     background-color: #519afa;
 }
 
-/* login page specific */
+/* user_log and signup page specific */
+
+
+.form_main{
+    width:40%;
+}
+
+.log_label{
+    font-weight: bold;
+    float:left;
+}
+
+input[type=text], input[type=password], input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
 
 .message_box{
     width: 60%;
@@ -144,5 +170,47 @@ fieldset{
     filter: invert();
 }
 
+/* games */
+.game {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 100%;
+}
+
+#left-pan {
+    display: block;
+    grid-column-start: 1;
+}
+#right-pan {
+    grid-column-start: 2;
+}
+
+.board{
+    border-spacing: 0px;
+    margin: 10px auto;
+    padding:0;
+    border: #636363 solid;
+    border-radius: 3px;
+}
+
 .cell {
+    border: #636363 solid;
+    margin: 0;
+    width: 100px;
+    height: 100px;
+}
+
+.cell img {
+    pointer-events: none;
+    width: 100px;
+    height: 100px;
+}
+
+/* Whack-A-Mole */
+
+.timer, .turn-indicator, .win-message{
+    margin: 10px;
+    font-weight: bold;
+    font-size: large;
 }

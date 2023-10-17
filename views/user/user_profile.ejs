@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZ games</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href ="/">
     <style>
         table {
             margin: 10px;
@@ -49,9 +50,11 @@
                 <th>Age</th>
                 <th>About me</th>
             </tr>
+            <tr>
                 <td>{{ data.userResult.id_name }}</td>
                 <td>{{ data.userResult.age }}</td>
                 <td>{{ data.userResult.about_me }}</td>
+            </tr>
             </tbody>
         </table>
 
@@ -115,7 +118,7 @@
             <tr v-for="row in data.sessionResult">
                 <td>{{ row.game_type }}</td>
                 <td>{{ row.game_result }}</td>
-                <td>{{ row.game_date }}</td>
+                <td>{{ new Date(row.game_date).toISOString().slice(0, 16).replace('T', ' ') + ' UTC'}}</td>
                 <td>{{ row.id_player_2 }}</td>
             </tr>
             </tbody>

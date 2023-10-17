@@ -36,6 +36,10 @@ class tttLeaderboardServiceClass{
         return tttLeaderBoardDAO.updatePlaceByPseudo(oldPseudo, newPseudo, wins, draws, losses);
     }
 
+    updatePlaceByPseudoIncrement(pseudo, gameResult){
+        return tttLeaderBoardDAO.updatePlaceByPseudoIncrement(pseudo, gameResult);
+    }
+
     async deletePlaceByPseudo(pseudo) {
         return tttLeaderBoardDAO.deletePlaceByPseudo(pseudo);
     }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZ games</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<%- include ('../header.ejs')%>
+<main class="form_main">
+    <%if(error!=null && error!= undefined){%>
+    <div class="message_box error">
+        <%if(error == 'pass') {%>
+            <p>Password doesn't meet security requirements or confirmation is wrong</p>
+        <%}%>
+        <%if(error == 'user'){%>
+        <p>User with pseudo <%=pseudo%> already exists</p>
+        <%}%>
+    </div>
+    <%}%>
+    <%if(info!=null && info!= undefined){%>
+    <div class="message_box info">
+        <p><%=info%></p>
+    </div>
+    <%}%>
+
+    <form action="/trysignup" method="post">
+        <div><label class="log_label" for="pseudo">Pseudo : </label>
+            <input type="text" name="pseudo" placeholder="Enter your Pseudo" required>
+        </div>
+        <div>
+            <label class="log_label" for="password">Password : </label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div>
+            <label class="log_label" for="confirm_password">Confirm Password : </label>
+            <input type="password" name="confirm_password" placeholder="Enter your password" required>
+        </div>
+        <div>
+            <label class="log_label" for="age">Age : </label>
+            <input type="number" name="age" max="120" min="1" placeholder="Enter your age" required>
+        </div>
+        <div class="message_box info" style="width: 90%; margin :5px 5%">
+            Note : password must be at least 8 characters long
+        </div>
+        <button type="submit">Sign up</button>
+    </form>
+    <p>Already have an account ? <a href = "/login">login</a></p>
+</main>
+<%- include ('../footer.ejs')%>
+</body>
+</html>

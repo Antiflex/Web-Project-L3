@@ -94,9 +94,27 @@ class tttLeaderboardDAOClass{
                 draws: draws,
                 losses: losses,
                 id_player: newPseudo
-            });
-            return {success:true, rows:await this.getLeaderboard()};
+            }).returning('*');
+            return {success:true, row:row};
         }else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
+    }
+
+    async updatePlaceByPseudoIncrement(pseudo, gameResult){
+        if (await this.existsPlaceByPseudo(pseudo)) {
+            const place = await this.getPlaceByPseudo(pseudo);
+            let wins = place.row.wins;
+            let draws = place.row.draws
+            let losses = place.row.losses;
+            if(gameResult === "WIN")
+                wins++;
+            if(gameResult === "DRAW")
+                draws++;
+            if(gameResult === "LOSS")
+                losses++;
+            const result = await this.updatePlaceByPseudo(pseudo,pseudo,wins,draws,losses)
+            return result;
+        }
+        else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
     }
 
     async deletePlaceByPseudo(pseudo) {

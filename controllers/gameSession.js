@@ -23,6 +23,7 @@ class gameSessionControllerClass {
     };
 
     async createGameSession(req,res){
+        console.log('--------------------\n req :',req.body);
         try{
             const result = await gameSessionService.createGameSession(req.body.gameType, req.body.gameResult,
                 req.body.gameDate, req.body.pseudo1, req.body.pseudo2);

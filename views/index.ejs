@@ -9,11 +9,22 @@
 <body>
 <%- include ('header.ejs')%>
 <main>
+    <div id="description" class="game-preview">
+        <h2>About this site</h2>
+        <div>
+            <h3>Welcome to EZ games !!!<br></h3>
+            <p>Here you can play Whack-A-Mole and Tic-Tac-Toe !</p>
+        </div>
+        <di>
+            <div class="game-preview-img"><img src="/img/wam.png" alt="Whack-a-Mole Thumbnail" class="gamepreview"></div>
+            <div class="game-preview-img"><img src="/img/ttt.png" alt="Tic-Tac-Toe Thumbnail" class="gamepreview"></div>
+        </di>
+    </div>
     <h3>How would you like to play ?</h3>
     <form action="/" method="post">
         <fieldset>
             <div id="difficulty">
-                <label>Difficulty :</label>
+                <label><strong>Difficulty :</strong></label>
                 <input id="slider" name="difficulty" type="range" min="0" max="2" value="0" step="1" oninput="const difficulty = ['Easy','Medium','Hard'];
                 rangeValue.innerText = difficulty[this.value]">
                 <p id="rangeValue">Easy</p>

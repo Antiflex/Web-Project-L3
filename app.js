@@ -10,7 +10,7 @@ import {wamLeaderBoardController} from "./controllers/wamLeaderboard.js";
 import {gameSessionController} from "./controllers/gameSession.js";
 
 import {getGameParams, playTTT, playWAM, sendGame} from './controllers/gamesController.js';
-import {login, userProfile} from './controllers/login.js'
+import {login, userProfile, signup} from './controllers/user_log.js'
 
 const app = express();
 app.use(
@@ -47,6 +47,12 @@ app.get("/login",(req,res)=>{
     res.render("user/login",{error:req.query.error, pseudo:req.query.pseudo, info:req.query.info});
 });
 
+// signup page
+
+app.get("/signup", (req,res)=>{
+    res.render("user/signup", {error:req.query.error, pseudo:req.query.pseudo, info:req.query.info})
+});
+
 // logout
 
 app.get("/logout",(req,res)=>{
@@ -70,11 +76,13 @@ app.get("/CRUD",(req,res)=>{
 
 app.post('/trylogin',login);
 
+app.post('/trysignup',signup);
+
 // dynamic endpoints
 
 app.post('/api/get_game_params', getGameParams);
 
-app.post("/api/play", sendGame);
+app.post('/api/play', sendGame);
 
 // user profile api routes
 
@@ -109,6 +117,8 @@ app.post('/ttt_leaderboard/create_place', tttLeaderBoardController.createPlace);
 app.get('/ttt_leaderboard/update_leaderboard', tttLeaderBoardController.updateLeaderboard)
 
 app.post('/ttt_leaderboard/update_place_by_pseudo', tttLeaderBoardController.updatePlaceByPseudo);
+
+app.post('/ttt_leaderboard/update_place_by_pseudo_increment', tttLeaderBoardController.updatePlaceByPseudoIncrement);
 
 app.post('/ttt_leaderboard/delete_place_by_pseudo', tttLeaderBoardController.deletePlaceByPseudo);
 

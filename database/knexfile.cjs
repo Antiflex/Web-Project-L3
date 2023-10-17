@@ -1,4 +1,5 @@
 // Update with your config settings.
+var moment = require('moment');
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -10,7 +11,7 @@ module.exports = {
     connection: {
       database: 'EZ_games',
       user:     'admin_games',
-      password: 'password'
+      password: 'password',
     },
     pool: {
       min: 2,

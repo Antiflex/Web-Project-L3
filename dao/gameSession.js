@@ -5,7 +5,7 @@ class gameSessionDAOClass {
         const result = await db("game_session").where(filters)
             .andWhere(function(){
                 this.where({id_player_1:pseudo}).orWhere({id_player_2:pseudo})
-        });
+        }).orderBy('game_date','desc');
         return result;
     };
 
