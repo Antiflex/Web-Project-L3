@@ -23,8 +23,8 @@
                 <th>Losses</th>
             </tr>
             <tr v-for="row in data">
-                <td>{{ row.id_place_wam }}</td>
-                <td>{{ 20 * row.wins - 15 * row.losses }}</td>
+                <td>#{{ row.id_place_wam }}</td>
+                <td>{{ Math.max(0, 20 * row.wins - 15 * row.losses) }}</td>
                 <td>{{ row.id_player }}</td>
                 <td>{{ row.wins }}</td>
                 <td>{{ row.losses }}</td>

@@ -32,6 +32,13 @@ export async function userProfile(req, res){
         const tttResult = await tttLeaderBoardService.getPlaceByPseudo(req.session.pseudo);
         const wamResult = await wamLeaderBoardService.getPlaceByPseudo(req.session.pseudo);
         const sessionResult = await gameSessionService.getGameSessionsByPseudo(req.session.pseudo,{});
+
+        for (let row of [tttResult, wamResult, gameSessionService]){
+            if (row.success === false){
+                row.row = {}
+            }
+        }
+
         return res.render('user/user_profile', {data:JSON.stringify({
             userResult:userResult.row,
             tttResult:tttResult.row,

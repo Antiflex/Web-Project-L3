@@ -48,13 +48,14 @@ function start(){
             ['img/moles/hole.png', 'img/moles/hole.png', 'img/moles/hole.png'],
             ['img/moles/hole.png', 'img/moles/hole.png', 'img/moles/hole.png']
         ];
+        console.log('diff:',this.data.difficulty)
         let interval;
-        if (this.difficulty === "Easy")
-            interval = 2800;
-        else if (this.difficulty === "Medium")
-            interval = 1800;
+        if (this.data.difficulty === "Easy")
+            interval = 2000;
+        else if (this.data.difficulty === "Medium")
+            interval = 1200;
         else
-            interval = 800;
+            interval = 700;
 
         timeIntervals.push(setInterval(() => {
             if (this.gameStarted) {

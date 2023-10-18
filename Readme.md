@@ -1,4 +1,6 @@
 # Web Project : EZ Games
+Project made by : Alexandre BAUDIN  
+Note that some ```console.log``` may be remaining from development
 ## Main features :
 * A few simple games : [*tic-tac-toe*](https://en.wikipedia.org/wiki/Tic-tac-toe) and [*whack-a-mole*](https://en.wikipedia.org/wiki/Whac-A-Mole)
 * A signup-login-logout system

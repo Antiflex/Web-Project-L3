@@ -1,6 +1,10 @@
 
 import {UserProfileDAO} from '../dao/userProfile.js'
 export class UserProfileServiceClass{
+
+    existsUser(pseudo){
+        return UserProfileDAO.existsUser(pseudo);
+    }
     getUserProfileById(pseudo){
         return UserProfileDAO.getUserProfileById(pseudo);
     }

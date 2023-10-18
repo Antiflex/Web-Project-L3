@@ -1,8 +1,9 @@
 import db from "../database/database.js";
+import {UserProfileService} from "../services/userProfile.js";
 
 class tttLeaderboardDAOClass{
     async getLeaderboard(){
-        return db.select('*').from('ttt_leaderboard');
+        return db.select('*').from('ttt_leaderboard').orderBy('id_place_ttt','asc').limit(20);
     }
 
     async existsPlaceById(place){
@@ -39,6 +40,10 @@ class tttLeaderboardDAOClass{
     }
 
     async createPlace(pseudo) {
+        // check if the user is registered in the user_profile table
+        if(!await UserProfileService.existsUser(pseudo)){
+            return {success:false, error:"This user doesn't exist"};
+        }
         //check if the user already exists in the leaderboard, if not : create a place in the last place
         if (await this.existsPlaceByPseudo(pseudo) === 0) {
             const last = await this.getLastPlace()
@@ -67,6 +72,8 @@ class tttLeaderboardDAOClass{
         for(let i = 0; i < last; i++){
             place = leaderboard.rows[i];
             placeUpdate = await this.createPlace(place.id_player);
+            if(!(placeUpdate.success))
+                i--;
             await this.updatePlaceById(i+1, place.wins, place.draws, place.losses, place.id_player);
         }
         return leaderboard.rows;
@@ -82,39 +89,43 @@ class tttLeaderboardDAOClass{
                 losses: losses,
                 id_player : pseudo});
             return {success:true};
-        }else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
+        }else return {success:false, error :"Place with this ID does not exist in the leaderboard"};
     }
 
     async updatePlaceByPseudo(oldPseudo, newPseudo, wins, draws, losses) {
         console.log(`updating place of user ${oldPseudo}`);
         //check if the user exists
-        if (await this.existsPlaceByPseudo(oldPseudo)) {
-            const row = await db('ttt_leaderboard').where({id_player: oldPseudo}).update({
-                wins: wins,
-                draws: draws,
-                losses: losses,
-                id_player: newPseudo
-            }).returning('*');
-            return {success:true, row:row};
-        }else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
+        if (await this.existsPlaceByPseudo(oldPseudo) || oldPseudo === newPseudo) {
+            if(!await this.existsPlaceByPseudo(newPseudo) || oldPseudo === newPseudo) {
+                const row = await db('ttt_leaderboard').where({id_player: oldPseudo}).update({
+                    wins: wins,
+                    draws: draws,
+                    losses: losses,
+                    id_player: newPseudo
+                }).returning('*');
+                return {success:true, row:row};
+            }
+            else
+                return {success:false, error :"User with this the new pseudo already exists in the leaderboard"};
+        }else return {success:false, error :"User with this the old pseudo does not exist in the leaderboard"};
     }
 
     async updatePlaceByPseudoIncrement(pseudo, gameResult){
-        if (await this.existsPlaceByPseudo(pseudo)) {
-            const place = await this.getPlaceByPseudo(pseudo);
-            let wins = place.row.wins;
-            let draws = place.row.draws;
-            let losses = place.row.losses;
-            if(gameResult === "WIN")
-                wins++;
-            if(gameResult === "DRAW")
-                draws++;
-            if(gameResult === "LOSS")
-                losses++;
-            const result = await this.updatePlaceByPseudo(pseudo,pseudo,wins,draws,losses)
-            return result;
+        let existsPlace = true
+        if (!await this.existsPlaceByPseudo(pseudo)) {
+            await this.createPlace(pseudo);
         }
-        else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
+        const place = await this.getPlaceByPseudo(pseudo);
+        let wins = place.row.wins;
+        let draws = place.row.draws;
+        let losses = place.row.losses;
+        if(gameResult === "WIN")
+            wins++;
+        if(gameResult === "DRAW")
+            draws++;
+        if(gameResult === "LOSS")
+            losses++;
+        return await this.updatePlaceByPseudo(pseudo, pseudo, wins, draws, losses);
     }
 
     async deletePlaceByPseudo(pseudo) {

@@ -13,9 +13,9 @@ exports.seed = async function(knex) {
 
   await knex('user_profile').insert([
     {id_name: 'Alex', age: 19, about_me: 'Hi I am Alex and I like playing here', password:'$2b$08$vvtnFgSpTYIKl.JeqF7P4uuNb0c23tw74vg4eCrzV8vDyCtXaWlhi'}, // password : 'password'
-    {id_name: 'Kwentyne', age: 19, about_me: 'Hi I was brought here by force', password: 'j\'adore rire'}, // password : 'j'adore rire'
-    {id_name: 'Max', age: 20, about_me: 'Hi I may or may not be a human', password: 'j\'adore TayTay'},
-    {id_name: 'Nico', age: 20, about_me: 'Hi I actually am not Pamela', password: 'je suis pamela'},
+    {id_name: 'Kwentyne', age: 19, about_me: 'Hi I was brought here by force', password: '$2b$08$ei1WGgQkSUmruNrXAjllkuUSWSov1yE9bzMwfQOi2FipW/cHJT882'}, // password : 'j'adore rire'
+    {id_name: 'Max', age: 20, about_me: 'Hi I may or may not be a human', password: '$2b$08$ufZ0LtBcoZzLiC1UJcMEzuPH1Wbfpaq52Go.G8GatvuMyJzUQzwYq'}, // password : 'j'adore TayTay'
+    {id_name: 'Nico', age: 20, about_me: 'Hi I actually am not Pamela', password: '$2b$08$hwkScs40XYWnSfPZMC5wxOjjKfaeAH1J2uZl0hQKC0i8xPdKBuE76'}, // password : 'je suis pamela'
     {id_name: 'Easy_AI', age: null, about_me: 'I will go easy on you', password: null},
     {id_name: 'Medium_AI', age: null, about_me: 'I will make it a bit hard for you', password: null},
     {id_name: 'Hard_AI', age: null, about_me: 'I will make it a nightmare for you', password: null},
@@ -55,13 +55,3 @@ exports.seed = async function(knex) {
     {id_player_1: 'Max', id_player_2: 'Nico'}
   ])
 };
-
-/*
-INSERT INTO Is_friend_with(id_player_1, id_player_2) VALUES
-('Alex','Kwentyne'),
-('Alex','Max'),
-('Alex','Nico'),
-('Kwentyne','Max'),
-('Kwentyne','Nico'),
-('Max','Nico');
- */
