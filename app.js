@@ -1,7 +1,5 @@
 import express from 'express';
 import session from 'express-session'
-import * as fs from 'fs';
-import promisify from 'util';
 
 import {UserProfileController} from './controllers/userProfile.js';
 import {FriendController} from "./controllers/friend.js";
@@ -9,6 +7,7 @@ import {tttLeaderBoardController} from "./controllers/tttLeaderboard.js";
 import {wamLeaderBoardController} from "./controllers/wamLeaderboard.js";
 import {gameSessionController} from "./controllers/gameSession.js";
 
+import {getTttLeaderboard, getWamLeaderboard} from './controllers/leaderboardsController.js'
 import {getGameParams, playTTT, playWAM, sendGame} from './controllers/gamesController.js';
 import {login, userProfile, signup} from './controllers/user_log.js'
 
@@ -34,11 +33,19 @@ app.get("/",(req, res) => {
     res.status(200).render('index.ejs',{ root: "./" });
 });
 
+// game pages
+
 // whack-a-mole page
 app.get("/whack-a-mole",playWAM);
 
 // tic-tac-toe page
 app.get("/tic-tac-toe",playTTT);
+
+// leaderboard pages
+
+app.get('/ttt_leaderboard',getTttLeaderboard)
+
+app.get('/wam_leaderboard',getWamLeaderboard)
 
 //user related pages
 
@@ -137,6 +144,8 @@ app.post('/wam_leaderboard/create_place', wamLeaderBoardController.createPlace);
 app.get('/wam_leaderboard/update_leaderboard', wamLeaderBoardController.updateLeaderboard)
 
 app.post('/wam_leaderboard/update_place_by_pseudo', wamLeaderBoardController.updatePlaceByPseudo);
+
+app.post('/wam_leaderboard/update_place_by_pseudo_increment', wamLeaderBoardController.updatePlaceByPseudoIncrement);
 
 app.post('/wam_leaderboard/delete_place_by_pseudo', wamLeaderBoardController.deletePlaceByPseudo);
 

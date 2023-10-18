@@ -5,35 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whack-a-Mole</title>
   <link rel="stylesheet" href="/style.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+<!-- pass variables from ejs (server-side) to vue-js (client-side) -->
+<data id="data" hidden><%=JSON.stringify({game:query.game, pseudo:query.pseudo, difficulty:query.difficultyString})%></data>
 <%- include ('../header.ejs')%>
-<main>
-<p> Hi <%=query.pseudo%> !<br>
-  You are going to play <%=query.game%> in difficulty <%=query.difficultyString%> !</p>
-  <div class="timer">
-    Timer:<Timer id="timer"></Timer>
-  </div>
-  <div class="game-container">
-    <!-- Grid for moles -->
-    <div class="hole hole1"></div>
-    <div class="hole hole2"></div>
-    <div class="hole hole3"></div>
-    <div class="hole hole4"></div>
-    <div class="hole hole5"></div>
-    <div class="hole hole6"></div>
-    <div class="hole hole7"></div>
-    <div class="hole hole8"></div>
-    <div class="hole hole9"></div>
-  </div>
-  <div class="scoreboard">
-    <p>Score: <span id="score">0</span></p>
-    <p>Time Left: <span id="time-left">30</span> seconds</p>
+<main id="app">
+  <p> Hi {{data.pseudo}} !<br>You are going to play {{data.game}} in difficulty {{data.difficulty}} ! <a href ="/wam_leaderboard">See the leaderboard</a></p>
+  <div class="game">
+    <div id="left-pan">
+      <div class="centered-horizontally">
+        <button class="restart-button" @click="start()">Start Game</button>
+        <p class="timer">timer : {{formatTimer(timer).slice(0,2)}}.{{formatTimer(timer).slice(2,4)}} </p>
+        <p class="win-message">{{message}}</p>
+      </div>
+    </div>
+    <div id="right-pan">
+      <table class="board no-border">
+        <tbody>
+        <tr v-for="line in [0,1,2]" v-bind:id="'line:'+line">
+          <td v-for="col in [0,1,2]" class="cell no-border" v-bind:id="'cell:'+line+','+col" v-on:click="updateCell(line,col)">
+            <img v-bind:src="imageMatrix[line][col]" v-bind:alt="['O','X','empty'][gameMatrix[line][col]-1]">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
-<!--
-<script src="whack_a_mole.js"></script>
--->
+<script src="/scripts/whack_a_mole.js" type="module"></script>
+<script></script>
 <%- include ('../footer.ejs')%>
 </body>
 </html>

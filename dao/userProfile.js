@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt'
 
 const numSaltRounds = 8;
 
-//console.log(await bcrypt.hash('password',numSaltRounds));
+console.log(await bcrypt.hash('j\'adore rire',numSaltRounds));
 
 class UserProfileDAOClass{
 

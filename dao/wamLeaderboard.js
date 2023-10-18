@@ -96,6 +96,21 @@ class wamLeaderboardDAOClass{
         }else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
     }
 
+    async updatePlaceByPseudoIncrement(pseudo, gameResult){
+        if (await this.existsPlaceByPseudo(pseudo)) {
+            const place = await this.getPlaceByPseudo(pseudo);
+            let wins = place.row.wins;
+            let losses = place.row.losses;
+            if(gameResult === "WIN")
+                wins++;
+            if(gameResult === "LOSS")
+                losses++;
+            const result = await this.updatePlaceByPseudo(pseudo,pseudo,wins,losses)
+            return result;
+        }
+        else return {success:false, error :"User with this pseudo does not exist in the leaderboard"};
+    }
+
     async deletePlaceByPseudo(pseudo) {
         // check if the user exists
         if (await this.existsPlaceByPseudo(pseudo)) {

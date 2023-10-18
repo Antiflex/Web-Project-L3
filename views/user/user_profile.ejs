@@ -5,42 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZ games</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href ="/">
-    <style>
-        table {
-            margin: 10px;
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Tahoma, Geneva, sans-serif;
-        }
-        table td {
-            padding: 15px;
-        }
-        table tbody th {
-            background-color: #54585d;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 13px;
-            border: 1px solid #54585d;
-        }
-        table tbody td {
-            color: #636363;
-            border: 1px solid #dddfe1;
-        }
-        table tbody tr {
-            background-color: #f9fafb;
-        }
-        div{
-            margin: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href ="/table_style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <data id="data" hidden><%=data%></data>
 </head>
 <body>
 <%- include ('../header.ejs')%>
 <main id="app">
-    <h1>User Profile</h1>
+    <div class="title-div">
+        <h1>User Profile</h1>
+    </div>
     <div id="user_infos">
         <h2>Infos</h2>
         <table>
@@ -64,7 +38,10 @@
     </div>
 
     <div id="ttt_rank">
-        <h2>Tic-Tac-Toe ranking</h2>
+        <div class="title-div">
+            <h2>Tic-Tac-Toe ranking</h2>
+            <a href ="/wam_leaderboard">See the leaderboard</a>
+        </div>
         <table>
             <tbody>
             <tr>
@@ -86,13 +63,16 @@
     </div>
 
     <div id="wam_rank">
-        <h2>Whack-A-Mole ranking</h2>
+        <div class="title-div">
+            <h2>Whack-A-Mole ranking</h2>
+            <a href ="/wam_leaderboard">See the leaderboard</a>
+        </div>
         <table>
             <tbody>
             <tr>
-                <th>place</th>
-                <th>wins</th>
-                <th>losses</th>
+                <th>Place</th>
+                <th>Wins</th>
+                <th>Losses</th>
                 <th>Total score</th>
             </tr>
             <tr>
@@ -106,7 +86,9 @@
     </div>
 
     <div id="game_sessions">
-        <h2>Past games</h2>
+        <div class="title-div">
+            <h2>Past games</h2>
+        </div>
         <table>
             <tbody>
             <tr>

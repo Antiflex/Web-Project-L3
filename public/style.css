@@ -105,7 +105,8 @@ button{
     margin: 5px;
     width: 120px;
     height: 40px;
-    border: solid #3784e5 2px;
+    color: #0f5ab6;
+    border: solid #0f5ab6 2px;
     box-shadow: #dddfe1 2px 2px 3px;
     border-radius: 5px;
     text-align: center;
@@ -183,6 +184,7 @@ fieldset{
     grid-column-start: 1;
 }
 #right-pan {
+
     grid-column-start: 2;
 }
 
@@ -201,16 +203,23 @@ fieldset{
     height: 100px;
 }
 
+
 .cell img {
     pointer-events: none;
     width: 100px;
     height: 100px;
 }
 
-/* Whack-A-Mole */
+.no-border{
+    border : none;
+}
 
 .timer, .turn-indicator, .win-message{
     margin: 10px;
     font-weight: bold;
     font-size: large;
+}
+
+.centered-horizontally{
+    margin-top: 50%;
 }

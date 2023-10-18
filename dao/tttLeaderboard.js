@@ -103,7 +103,7 @@ class tttLeaderboardDAOClass{
         if (await this.existsPlaceByPseudo(pseudo)) {
             const place = await this.getPlaceByPseudo(pseudo);
             let wins = place.row.wins;
-            let draws = place.row.draws
+            let draws = place.row.draws;
             let losses = place.row.losses;
             if(gameResult === "WIN")
                 wins++;

@@ -1,3 +1,5 @@
+import {formattedDate} from "./commons.js";
+
 const app = Vue.createApp({
     el: '#app',
     data() {
@@ -26,24 +28,27 @@ const app = Vue.createApp({
     }
 })
 
+const mountedApp = app.mount('#app')
+
 function start(){
-    this.message = '';
-    this.gameStarted = true;
-    this.updatable = true;
-    this.gameMatrix=[
-        [0,0,0],
-        [0,0,0],
-        [0,0,0]
-    ];
-    this.imageMatrix=[
-        ['img/empty.png', 'img/empty.png', 'img/empty.png'],
-        ['img/empty.png', 'img/empty.png', 'img/empty.png'],
-        ['img/empty.png', 'img/empty.png', 'img/empty.png']
-    ]
+    if(!this.gameStarted) {
+        this.message = '';
+        this.gameStarted = true;
+        this.updatable = true;
+        this.gameMatrix = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ];
+        this.imageMatrix = [
+            ['img/empty.png', 'img/empty.png', 'img/empty.png'],
+            ['img/empty.png', 'img/empty.png', 'img/empty.png'],
+            ['img/empty.png', 'img/empty.png', 'img/empty.png']
+        ]
+    }
 }
 
 function updateCell(line, col) {
-    console.log(this.gameStarted, line, col)
     if (this.gameStarted && this.updatable) {
         if (this.gameMatrix[line][col] === 0) {
             this.gameMatrix[line][col] = 1;
@@ -79,53 +84,7 @@ function updateCell(line, col) {
                     }
 
                     // update database records
-
-                    const today = new Date();
-                    const yyyy = today.getFullYear();
-                    let mm = today.getMonth() + 1; // Months start at 0!
-                    let dd = today.getDate();
-                    let h24 = today.getHours();
-                    let mi = today.getMinutes();
-
-                    if (dd < 10) dd = '0' + dd;
-                    if (mm < 10) mm = '0' + mm;
-                    const formattedToday = yyyy + '-' + mm + '-' + dd + ' ' + h24 + ':' + mi;
-
-                    console.log('h24:',h24,'mi:',mi);
-                    console.log(formattedToday);
-                    console.log("fetching");
-
-                    let body = JSON.stringify({
-                        gameType: "TTT",
-                        gameResult: result,
-                        gameDate: formattedToday,
-                        pseudo1: this.data.pseudo,
-                        pseudo2: this.data.difficulty + '_AI'
-                    })
-
-                    console.log(body)
-                    let response = await fetch('http://localhost:3000/game_session/create_game_session', {
-                        method: 'POST',
-                        body: body,
-                        headers: {
-                            "Content-type": "application/json; charset=UTF-8"
-                        }
-                    })
-                    console.log(response);
-                    response = await fetch("http://localhost:3000/ttt_leaderboard/update_place_by_pseudo_increment",{
-                        method: 'POST',
-                        body: JSON.stringify({
-                            pseudo: this.data.pseudo,
-                            gameResult: result
-                        }),
-                        headers: {
-                            "Content-type": "application/json; charset=UTF-8"
-                        }
-                    })
-                    console.log(response);
-
-                    response = await fetch("http://localhost:3000/ttt_leaderboard/update_leaderboard");
-                    console.log(response)
+                    await updateRecords(this.data.pseudo, result, this.data.difficulty);
                 } else
                     this.updatable = true;
             }, 500);
@@ -204,4 +163,40 @@ function contains(mat,arr) {
             return true;
     }
     return result
+}
+
+async function updateRecords(pseudo, gameResult, difficulty){
+    const formattedToday = formattedDate();
+
+    let body = JSON.stringify({
+        gameType: "TTT",
+        gameResult: gameResult,
+        gameDate: formattedToday,
+        pseudo1: pseudo,
+        pseudo2: difficulty + '_AI'
+    })
+
+    console.log(body)
+    let response = await fetch('http://localhost:3000/game_session/create_game_session', {
+        method: 'POST',
+        body: body,
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    console.log(response);
+    response = await fetch("http://localhost:3000/ttt_leaderboard/update_place_by_pseudo_increment",{
+        method: 'POST',
+        body: JSON.stringify({
+            pseudo: pseudo,
+            gameResult: gameResult
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    console.log(response);
+
+    response = await fetch("http://localhost:3000/ttt_leaderboard/update_leaderboard");
+    console.log(response)
 }

@@ -36,6 +36,10 @@ class wamLeaderboardServiceClass{
         return wamLeaderBoardDAO.updatePlaceByPseudo(oldPseudo, newPseudo, wins, losses);
     }
 
+    updatePlaceByPseudoIncrement(pseudo, gameResult){
+        return wamLeaderBoardDAO.updatePlaceByPseudoIncrement(pseudo, gameResult);
+    }
+
     async deletePlaceByPseudo(pseudo) {
         return wamLeaderBoardDAO.deletePlaceByPseudo(pseudo);
     }

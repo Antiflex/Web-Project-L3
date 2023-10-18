@@ -11,6 +11,8 @@
     "pg": "^8.11.3"
   },
   "scripts": {
+    "seed_fake": "npx knex seed:run --specific fake_data.cjs --knexfile database/knexfile.cjs",
+    "seed_prod": "npx knex seed:run --specific prod.cjs --knexfile database/knexfile.cjs",
     "migrate": "npx knex migrate:latest --knexfile database/knexfile.cjs",
     "start": "node app.js",
     "dev": "nodemon app.js",

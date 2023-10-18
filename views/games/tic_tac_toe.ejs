@@ -8,22 +8,25 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+<!-- pass variables from ejs (server-side) to vue-js (client-side) -->
 <data id="data" hidden><%=JSON.stringify({game:query.game, pseudo:query.pseudo, difficulty:query.difficultyString})%></data>
 <%- include ('../header.ejs')%>
 <main id="app">
-<p> Hi <%=query.pseudo%> !<br>You are going to play <%=query.game%> in difficulty <%=query.difficultyString%> !</p>
+<p> Hi {{data.pseudo}} !<br>You are going to play {{data.game}} in difficulty {{data.difficulty}} ! <a href ="/ttt_leaderboard">See the leaderboard</a></p>
   <div class="game">
     <div id="left-pan">
-      <button class="restart-button" @click="start()">Start Game</button>
-      <p class="turn-indicator" v-bind:hidden="!updatable && !gameStarted">Your turn</p>
-      <p class="win-message">{{message}}</p>
+      <div class="centered-horizontally">
+        <button class="restart-button" @click="start()">Start Game</button>
+        <p class="turn-indicator" v-bind:hidden="!updatable && !gameStarted">Your turn</p>
+        <p class="win-message">{{message}}</p>
+      </div>
     </div>
     <div id="right-pan">
     <table class="board">
       <tbody>
       <tr v-for="line in [0,1,2]" v-bind:id="'line:'+line">
         <td v-for="col in [0,1,2]" class="cell" v-bind:id="'cell:'+line+','+col" v-on:click="updateCell(line,col)">
-          <img v-bind:src="imageMatrix[line][col]">
+          <img v-bind:src="imageMatrix[line][col]" v-bind:alt="['O','X','empty'][gameMatrix[line][col]-1]">
         </td>
       </tr>
       </tbody>
@@ -32,8 +35,7 @@
   </div>
 </main>
 
-<script src="scripts/tic_tac_toe.js"></script>
-<script> const mountedApp = app.mount('#app')</script>
+<script src="scripts/tic_tac_toe.js" type="module"></script>
 <%- include ('../footer.ejs')%>
 
 </body>

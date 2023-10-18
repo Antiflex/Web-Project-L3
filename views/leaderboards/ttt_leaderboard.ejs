@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/table_style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<%- include ('../header.ejs')%>
+<main id="app">
+    <h1>Tic-Tac-Toe Leaderboard</h1>
+    <div id="leaderboard">
+        <table>
+            <tbody>
+            <tr>
+                <th>Place</th>
+                <th>Score</th>
+                <th>Player</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losses</th>
+            </tr>
+            <tr v-for="row in data">
+                <td>{{ row.id_place_ttt }}</td>
+                <td>{{ 20 * row.wins - 15 * row.losses }}</td>
+                <td>{{ row.id_player }}</td>
+                <td>{{ row.wins }}</td>
+                <td>{{ row.draws }}</td>
+                <td>{{ row.losses }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script src="/scripts/ttt_leaderboard.js" type="module"></script>
+<%- include ('../footer.ejs')%>
+</body>
+</html>
