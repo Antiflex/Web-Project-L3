@@ -15,6 +15,12 @@ exports.seed = async function(knex) {
       {id_name: 'Easy_AI', age: null, about_me: 'I will go easy on you', password: null},
     {id_name: 'Medium_AI', age: null, about_me: 'I will make it a bit hard for you', password: null},
     {id_name: 'Hard_AI', age: null, about_me: 'I will make it a nightmare for you', password: null}
-]);
+  ]);
+
+  await knex('ttt_leaderboard').insert(
+      {id_place_ttt: 1, wins: 0, draws: 0, losses: 0, id_player: 'Alex'});
+
+  await knex('wam_leaderboard').insert(
+      {id_place_wam: 1, wins: 0, losses: 0, id_player: 'Alex'});
 
 };

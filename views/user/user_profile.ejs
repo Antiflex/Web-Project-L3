@@ -40,7 +40,7 @@
     <div id="ttt_rank">
         <div class="title-div">
             <h2>Tic-Tac-Toe ranking</h2>
-            <a href ="/wam_leaderboard">See the leaderboard</a>
+            <a href ="/ttt_leaderboard">See the leaderboard</a>
         </div>
         <table>
             <tbody>
@@ -56,7 +56,7 @@
                 <td>{{data.tttResult.wins}}</td>
                 <td>{{data.tttResult.draws}}</td>
                 <td>{{data.tttResult.losses}}</td>
-                <td>{{20*data.tttResult.wins - 15 * data.tttResult.losses}}</td>
+                <td>{{ Math.max(0,20*data.tttResult.wins - 15 * data.tttResult.losses) }}</td>
             </tr>
             </tbody>
         </table>
@@ -79,7 +79,7 @@
                 <td>#{{data.wamResult.id_place_wam}}</td>
                 <td>{{data.wamResult.wins}}</td>
                 <td>{{data.wamResult.losses}}</td>
-                <td>{{20*data.wamResult.wins - 15 * data.wamResult.losses}}</td>
+                <td>{{ Math.max(0, 20 * data.wamResult.wins - 15 * data.wamResult.losses)}}</td>
             </tr>
             </tbody>
         </table>
