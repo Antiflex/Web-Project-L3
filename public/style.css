@@ -1,4 +1,10 @@
 /* Reset some default styles */
+
+@font-face {
+    font-family: 'Mangold Open Sans';
+    src: url('/MANGOLD.ttf');
+}
+
 body, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
@@ -19,9 +25,8 @@ header {
     padding: 20px 0;
 }
 
-.title {
-    text-decoration: none;
-    color: #519afa;
+.logo img{
+    width: 150px;
 }
 
 /* Style of the navigation menu */
@@ -105,8 +110,8 @@ button{
     margin: 5px;
     width: 120px;
     height: 40px;
-    color: #0f5ab6;
-    border: solid #0f5ab6 2px;
+    color: #053062;
+    border: solid #0f5ab6 1.5px;
     box-shadow: #dddfe1 2px 2px 3px;
     border-radius: 5px;
     text-align: center;
